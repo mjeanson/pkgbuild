@@ -8,7 +8,7 @@ pkgdesc="command-line trace reader for LTTng"
 arch=('i686' 'x86_64')
 url="http://lttng.org/"
 license=('GPL' 'MIT')
-depends=('liburcu' 'popt' 'util-linux' 'glib2>=2.22.0')
+depends=('popt' 'util-linux' 'glib2>=2.22.0')
 source=(http://lttng.org/files/$pkgname/$pkgname-$pkgver.tar.bz2)
 install='babeltrace.install'
 sha1sums=('d03894022757298f5de3678c6cd51a26a8931010')
