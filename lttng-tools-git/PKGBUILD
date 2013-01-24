@@ -9,6 +9,7 @@ url="http://lttng.org/"
 license=('GPL2 LGPL2')
 provides=('lttng')
 conflicts=('lttng-tools')
+makedepends=('git')
 depends=('popt' 'flex>=2.5.35' 'liburcu>=0.7.2' 'lttng-ust')
 optdepends=('lttng-modules: kernel tracing support' 'babeltrace: trace viewing')
 
