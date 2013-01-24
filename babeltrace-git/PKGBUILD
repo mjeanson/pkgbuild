@@ -10,7 +10,7 @@ license=('GPL' 'MIT')
 makedepends=('git')
 depends=('popt' 'flex>=2.5.35' 'util-linux' 'glib2>=2.22.0')
 conflicts=('babeltrace')
-install='babeltrace.install'
+install='babeltrace-git.install'
 
 _gitroot="git://git.efficios.com/babeltrace.git"
 _gitname="babeltrace"
