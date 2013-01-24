@@ -12,6 +12,7 @@ makedepends=('git')
 provides=('lttng-ust')
 conflicts=('lttng-ust')
 optdepends=('babeltrace')
+install='lttng-ust-git.install'
 
 _gitroot="git://git.lttng.org/lttng-ust.git"
 _gitname="lttng-ust"
