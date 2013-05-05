@@ -18,21 +18,22 @@ install='lttng-ust-git.install'
 source=('git://git.lttng.org/lttng-ust.git')
 sha1sums=('SKIP')
 
-pkgver() {
+pkgver()
+{
     cd $_gitname
     git describe --always | sed 's|-|.|g'
 }
 
-build() {
+build()
+{
     cd $_gitname
-
     ./bootstrap
     ./configure --prefix=/usr
-
     make
 }
 
-package() {
+package()
+{
     cd $_gitname
     make DESTDIR="$pkgdir/" install
 }
