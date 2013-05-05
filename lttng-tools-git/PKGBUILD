@@ -2,7 +2,7 @@
 
 pkgname=lttng-tools-git
 _gitname="lttng-tools"
-pkgver=v2.2.0.rc1.45.gf7cbc76
+pkgver=v2.2.0.rc1.53.g994fa64
 pkgrel=1
 pkgdesc="Trace control client for LTTng"
 arch=('i686' 'x86_64')
@@ -17,21 +17,22 @@ options=('!libtool')
 source=('git://git.lttng.org/lttng-tools.git')
 sha1sums=('SKIP')
 
-pkgver() {
-    cd $_gitname
+pkgver()
+{
+    cd ${_gitname}
     git describe --always | sed 's|-|.|g'
 }
 
-build() {
-    cd $_gitname
-
+build()
+{
+    cd ${_gitname}
     ./bootstrap
-    CFLAGS="-DDEBUG" ./configure --prefix=/usr
-
+    ./configure --prefix=/usr
     make
 }
 
-package() {
-    cd $_gitname
-    make DESTDIR="$pkgdir/" install
+package()
+{
+    cd ${_gitname}
+    make install DESTDIR=${pkgdir}
 }
