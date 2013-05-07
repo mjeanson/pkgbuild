@@ -13,13 +13,13 @@ sha1sums=('75cff2b4f92b46763ac4f6fec2956357632da50a')
 
 build()
 {
-	cd "$srcdir/$pkgname-$pkgver"
-	./configure --prefix=/usr
-	make
+    cd ${srcdir}/${pkgname}-${pkgver}
+    ./configure --prefix=/usr
+    make
 }
 
 package()
 {
-	cd "$srcdir/$pkgname-$pkgver"
-	make DESTDIR="$pkgdir" install
+    cd ${srcdir}/${pkgname}-${pkgver}
+    make install DESTDIR=${pkgdir}
 }
