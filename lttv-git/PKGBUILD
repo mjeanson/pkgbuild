@@ -13,27 +13,29 @@ makedepends=('git')
 provides=('lttv')
 conflicts=('lttv')
 options=(!libtool)
-
 source=("git://git.lttng.org/lttv.git")
 sha1sums=('SKIP')
 
-pkgver() {
-  cd $_gitname
-  git describe --always | sed 's|-|.|g'
+pkgver()
+{
+    cd ${_gitname}
+    git describe --always | sed 's|-|.|g'
 }
 
-build() {
-  cd $_gitname
-  ./bootstrap
-  ./configure --prefix=/usr \
-              --sysconfdir=/etc \
-              --localstatedir=/var \
-              --libexecdir="/usr/lib/$pkgname"
+build()
+{
+    cd ${_gitname}
+    ./bootstrap
+    ./configure --prefix=/usr \
+                --sysconfdir=/etc \
+                --localstatedir=/var \
+                --libexecdir=/usr/lib/${pkgname}
 
-  make
+    make
 }
 
-package() {
-  cd $_gitname
-  make DESTDIR="$pkgdir/" install
+package()
+{
+    cd ${_gitname}
+    make install DESTDIR=${pkgdir}
 }
