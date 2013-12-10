@@ -10,18 +10,22 @@ pkgname=llvm-svn
 true && pkgname=('llvm-svn' 'llvm-libs-svn' 'llvm-ocaml-svn')
 
 _pkgname='llvm'
-pkgver=196796
+pkgver=196918
 pkgrel=1
 pkgdesc='Low Level Virtual Machine - Compiler infrastructure.'
 arch=('i686' 'x86_64')
 url="http://llvm.org"
 license=('custom:University of Illinois')
 makedepends=('subversion' 'libffi' 'python2' 'ocaml' 'python-sphinx')
-options=('staticlibs')
-source=("${_pkgname}::svn+http://llvm.org/svn/llvm-project/llvm/trunk")
-sha1sums=('SKIP')
+
 # this is always the latest svn so debug info can be useful
-options=('!strip')
+options=('staticlibs' '!strip')
+source=("${_pkgname}::svn+http://llvm.org/svn/llvm-project/llvm/trunk"
+	llvm-Config-config.h
+        llvm-Config-llvm-config.h)
+sha256sums=('SKIP'
+	    '312574e655f9a87784ca416949c505c452b819fad3061f2cde8aced6540a19a3'
+            '597dc5968c695bbdbb0eac9e8eb5117fcd2773bc91edf5ec103ecffffab8bc48')
 
 pkgver()
 {
@@ -91,17 +95,17 @@ package_llvm-svn() {
     # (https://bugs.archlinux.org/task/28479)
     install -d "$pkgdir/usr/lib/bfd-plugins"
     ln -s ../LLVMgold.so "$pkgdir/usr/lib/bfd-plugins/LLVMgold.so"
-    ls
-    #if [[ $CARCH == x86_64 ]]; then
-    # Needed for multilib (https://bugs.archlinux.org/task/29951)
-    # Header stubs are taken from Fedora
-    #for _header in config llvm-config; do
-    # echo "$pkgdir/usr/include/llvm/Config/$_header"{,-64}.h
-    # mv "$pkgdir/usr/include/llvm/Config/$_header"{,-64}.h
-    # cp "$srcdir/llvm-Config-$_header.h" \
-    # "$pkgdir/usr/include/llvm/Config/$_header.h"
-    #done
-    #fi
+
+    if [[ $CARCH == x86_64 ]]; then
+        # Needed for multilib (https://bugs.archlinux.org/task/29951)
+        # Header stubs are taken from Fedora
+        for _header in config llvm-config; do
+            echo "$pkgdir/usr/include/llvm/Config/$_header"{,-64}.h
+            mv "$pkgdir/usr/include/llvm/Config/$_header"{,-64}.h
+            cp "$srcdir/llvm-Config-$_header.h" \
+                 "$pkgdir/usr/include/llvm/Config/$_header.h"
+        done
+    fi
 
     # Install man pages
     install -d "$pkgdir/usr/share/man/man1"
