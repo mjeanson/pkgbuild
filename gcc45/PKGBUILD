@@ -4,15 +4,15 @@
 
 pkgname=gcc45
 pkgver=4.5.4
-pkgrel=2
+pkgrel=3
 pkgdesc="The GNU Compiler Collection (4.5.x)"
 arch=('i686' 'x86_64')
 license=('GPL' 'LGPL' 'custom')
 url="http://gcc.gnu.org"
 depends=('glibc' 'binutils' 'gmp' 'mpfr' 'libmpc' 'ppl' 'isl' 'cloog' 'elfutils')
 makedepends=('flex' 'bison' 'setconf')
-options=('!libtool' '!buildflags')
-provides=('gcc=4.5')
+options=('!libtool' '!buildflags' 'staticlibs')
+provides=('gcc-4.5')
 source=("http://www.mirrorservice.org/sites/sourceware.org/pub/gcc/releases/gcc-$pkgver/gcc-$pkgver.tar.bz2"
         "gcc-hash-style-both.patch"
 	"gcc_pure64.patch")
