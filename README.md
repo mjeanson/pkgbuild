@@ -1,4 +1,4 @@
 pkgbuild
 ========
 
-My Arch Linux PKGBUILDs
+LTTng related Arch Linux PKGBUILDs
